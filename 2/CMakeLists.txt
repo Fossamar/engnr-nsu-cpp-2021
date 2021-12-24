@@ -16,7 +16,7 @@ add_executable(cpp_labs_2
         StackCalculator.hpp
         CommandFactory.h
         CommandFactory.cpp
-        Commands.h Exceptions.cpp Exceptions.h Commands.cpp StackCalculatorContext.h)
+        Commands.h Exceptions.h Commands.cpp StackCalculatorContext.h)
 
 add_executable(cpp_labs_2_test
         test.cpp
@@ -24,7 +24,7 @@ add_executable(cpp_labs_2_test
         StackCalculator.hpp
         CommandFactory.h
         CommandFactory.cpp
-        Commands.h Exceptions.cpp Exceptions.h Commands.cpp StackCalculatorContext.h)
+        Commands.h Exceptions.h Commands.cpp StackCalculatorContext.h)
 
 target_link_libraries(cpp_labs_2_test gtest gtest_main)
 

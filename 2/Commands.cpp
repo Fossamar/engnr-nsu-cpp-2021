@@ -6,21 +6,24 @@
 
 #include <charconv>
 
-bool Push::is_number(const std::string &line) {
-    char *p;
-    strtol(line.c_str(), &p, 10);
-    return *p == 0;
-}
+//bool Push::is_number(const std::string &line) {
+//    char *p;
+//    strtol(line.c_str(), &p, 10);
+//    return *p == 0;
+//}
 
 void Push::exec(StackCalculatorContext &ctx) {
     string varname;
+    int64_t converted_num = 0;
+
     args >> varname;
-    if (is_number(varname)) {
-        int64_t converted_num = 0;
-        auto res =  std::from_chars(varname.data(), varname.data() + varname.size(), converted_num);
-        if (res.ec == std::errc::result_out_of_range){
-            throw OverflowException();
-        }
+
+    auto res =  std::from_chars(varname.data(), varname.data() + varname.size(), converted_num);
+    if (res.ec == std::errc::result_out_of_range) {
+        throw OverflowException();
+    } else if (res.ptr != varname.data() + varname.size()) {
+        throw InvalidArgumentsException();
+    } else if (res.ec == std::errc{}) {
         ctx.get_stack().push(converted_num);
     } else {
         if (ctx.get_map().count(varname) == 0)
